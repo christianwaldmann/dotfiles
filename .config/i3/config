@@ -77,10 +77,10 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1 Browser 🌍"
-set $ws2 "2 Terminal 🖥"
-set $ws3 "3 IDE 📝"
-set $ws4 "4 Notes 📒"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -172,19 +172,4 @@ for_window [class="Gnome-terminal" title="metask"] move scratchpad
 for_window [class="Gnome-terminal" title="metask"] border pixel 5
 for_window [class="Gnome-terminal" title="metask"] move scratchpad; [class="Gnome-terminal" title="metask"] scratchpad show; move scratchpad;
 bindsym $mod+q [class="Gnome-terminal"] scratchpad show; [class="Gnome-terminal"] move position center
-
-
-# assign programs to specific workspaces
-for_window [class="Chromium"] move to workspace $ws1
-for_window [class="Chromium"] workspace number $ws1
-for_window [class="Firefox"] move to workspace $ws1
-for_window [class="Firefox"] workspace number $ws1
-for_window [class="Joplin"] move to workspace $ws4
-for_window [class="Joplin"] workspace number $ws4
-
-
-# start programs on startup
-exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/gnome-terminal'
-exec --no-startup-id i3-msg 'workspace $ws3; exec /usr/bin/code'
 
