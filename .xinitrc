@@ -8,6 +8,7 @@ sleep 2 && {
  gnome-terminal --title="metask" -- zsh -c "while true; do tmux; done" &
  greenclip daemon &
  picom --backend xrender & 
+ imwheel -b 45
 } &
 
 # set keyboard repeat rate
