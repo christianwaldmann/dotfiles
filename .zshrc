@@ -25,15 +25,6 @@ setopt share_history
 . ~/repos/dotfiles/base16-shell/scripts/base16-tomorrow-night.sh
 
 # Custom functions
-function ls() 
-{
-  if [[ "$1" == -* ]]; then
-    exa --colour-scale -bghla -snew $2
-  else
-    exa --colour-scale -bghla -snew $1
-  fi
-}
-
 function mem() {
   echo $(echo $(smem -t -P $1 | tail -n 1 | rev | cut -d ' ' -f 2 | rev) / 1024 | bc) MB
 }
@@ -50,8 +41,7 @@ gpr() {
 }
 
 # Alias
-alias l="exa -bghl -snew"
-alias ll="exa -bghl -snew"
+alias ls="ls --color=auto"
 alias top="htop"
 alias eZ="vim ~/.zshrc"
 alias eI="vim ~/.config/i3/config"
