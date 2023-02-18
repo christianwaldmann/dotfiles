@@ -25,6 +25,10 @@ setopt share_history
 . ~/repos/dotfiles/base16-shell/scripts/base16-tomorrow-night.sh
 
 # Custom functions
+function rm() {
+  /bin/rm $@ -I
+}
+
 function mem() {
   echo $(echo $(smem -t -P $1 | tail -n 1 | rev | cut -d ' ' -f 2 | rev) / 1024 | bc) MB
 }
