@@ -1,3 +1,5 @@
+if [ "$TMUX" = "" ]; then tmux; fi
+
 # https://pastebin.com/raw/UWHMV2QF
 # Command Prompt: Pure
 autoload -U promptinit; promptinit; 
@@ -68,3 +70,5 @@ else
   bindkey '^[[3~'  delete-char
 fi
 
+# Auto suggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
