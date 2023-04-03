@@ -152,15 +152,16 @@ bindsym $mod+r mode "resize"
 
 # start status bar
 bar {
-#        font pango:DejaVu Sans Mono, FontAwesome 12
+	font pango:hack, FontAwesome 13
 	tray_output primary
 	position top
         status_command i3status-rs ~/.i3status-rs.conf
 	i3bar_command  i3bar -t
 	colors {
-		background #00000000
+		background #00000099
 		statusline #FFFFFF
 	}
+	workspace_min_width 60
 }
 
 
