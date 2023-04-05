@@ -1,5 +1,3 @@
-if [ "$TMUX" = "" ]; then tmux; fi
-
 # https://pastebin.com/raw/UWHMV2QF
 # Command Prompt: Pure
 autoload -U promptinit; promptinit; 
@@ -72,3 +70,6 @@ fi
 
 # Auto suggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Start tmux on every new terminal
+if [ "$TMUX" = "" ]; then tmux; fi
