@@ -56,6 +56,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias myip="curl http://ipecho.net/plain; echo"
 alias usage='du -h -d1'
+alias serve="python -m http.server 8000"
 
 # Tmux Shortcuts
 if test $TMUX; then
