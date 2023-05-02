@@ -73,6 +73,7 @@ fi
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(kubectl completion zsh)
+source /usr/share/fzf/key-bindings.zsh
 
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
