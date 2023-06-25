@@ -11,6 +11,8 @@
   cob = checkout -b
   co = checkout
   cp = cherry-pick
+  d = diff
+  ds = diff --staged
   graph = "log --oneline --decorate --all --graph --simplify-by-decoration"
   graph2 = "log --graph --oneline --decorate"
   c = commit -m
