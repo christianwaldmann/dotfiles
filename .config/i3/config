@@ -178,3 +178,6 @@ for_window [class="Gnome-terminal" title="metask"] border pixel 5
 for_window [class="Gnome-terminal" title="metask"] move scratchpad; [class="Gnome-terminal" title="metask"] scratchpad show; move scratchpad;
 bindsym $mod+q [class="Gnome-terminal"] scratchpad show; [class="Gnome-terminal"] move position center
 
+
+
+default_orientation vertical
