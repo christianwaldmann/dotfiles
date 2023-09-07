@@ -56,6 +56,10 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias usage='du -h -d1'
 alias serve="python -m http.server 8000"
 
+function dockerssh() {
+  docker exec -it $(docker container ls | tail -n +2 | fzf | awk -F '   ' '{print $1}') /bin/bash
+}
+
 # Tmux Shortcuts
 if test $TMUX; then
   bindkey '^[[1~'  beginning-of-line
