@@ -1,9 +1,7 @@
-# https://pastebin.com/raw/UWHMV2QF
-# Command Prompt: Pure
 autoload -U promptinit; promptinit; 
-
 autoload -U compinit
 compinit
+autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
@@ -69,11 +67,12 @@ else
   bindkey '^[[3~'  delete-char
 fi
 
-# Auto suggestions
+# Auto complete
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(kubectl completion zsh)
 source /usr/share/fzf/key-bindings.zsh
+complete -o nospace -C /usr/bin/terraform terraform
 
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
