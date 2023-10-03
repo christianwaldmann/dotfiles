@@ -78,5 +78,8 @@ source <(kubectl completion zsh)
 source /usr/share/fzf/key-bindings.zsh
 complete -o nospace -C /usr/bin/terraform terraform
 
+# Local binaries
+export PATH="$PATH:$HOME/go/bin"
+
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
