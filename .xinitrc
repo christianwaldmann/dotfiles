@@ -14,5 +14,8 @@ sleep 2 && {
 # set keyboard repeat rate
 xset r rate 300 40
 
+# remap capslock to escape
+setxkbmap -option caps:escape
+
 # start i3
 i3
