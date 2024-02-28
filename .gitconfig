@@ -21,6 +21,7 @@
   oops = commit --amend --no-edit
   size = count-objects -vH
   uncommit = reset HEAD^
+  branches = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short) %(objectname:short) %(authordate:short)%(color:reset) - %(contents:subject) %(color:blue)[%(authorname)]'
   alias = !git config --list | grep ^alias\\. | cut -c 7- | grep -Ei --color \"$1\" "#"
 [help]
   autocorrect = 10
