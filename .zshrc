@@ -82,7 +82,15 @@ complete -o nospace -C /usr/bin/terraform terraform
 source /home/christian/.jfrog/jfrog_zsh_completion
 
 # Local binaries
-export PATH="$PATH:$HOME/go/bin"
+function addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+addToPathFront $HOME/go/bin/
+addToPathFront $HOME/.local/bin/
+addToPathFront $HOME/.local/scripts
 
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
