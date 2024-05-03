@@ -55,6 +55,8 @@ alias ...="cd ../.."
 alias myip="curl http://ipecho.net/plain; echo"
 alias usage='du -h -d1'
 alias serve="python -m http.server 8000"
+alias k="kubectl"
+alias rpi-k8s="export KUBECONFIG=~/.kube/config.rpi-k8s"
 
 function dockerssh() {
   docker exec -it $(docker container ls | tail -n +2 | fzf | awk -F '   ' '{print $1}') /bin/bash
