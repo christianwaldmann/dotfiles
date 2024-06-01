@@ -169,15 +169,5 @@ for_window [class=".*"] border pixel 0
 gaps inner 5
 gaps outer 0
 
-
-# quick terminal on mod+q
-for_window [class="Gnome-terminal" title="metask"] floating enable
-for_window [class="Gnome-terminal" title="metask"] resize set 1600 800
-for_window [class="Gnome-terminal" title="metask"] move scratchpad
-for_window [class="Gnome-terminal" title="metask"] border pixel 5
-for_window [class="Gnome-terminal" title="metask"] move scratchpad; [class="Gnome-terminal" title="metask"] scratchpad show; move scratchpad;
-bindsym $mod+q [class="Gnome-terminal"] scratchpad show; [class="Gnome-terminal"] move position center
-
-
-
 default_orientation vertical
+
