@@ -10,7 +10,8 @@ select-word-style bash
 
 setopt auto_cd
 
-prompt pure
+# Prompt
+eval "$(starship init zsh)"
 
 # History
 HISTFILE=~/.zsh_history
