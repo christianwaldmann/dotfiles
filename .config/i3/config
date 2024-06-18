@@ -26,16 +26,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show drun -show-icons -font 'hack 16'  -display-drun '🗃️' -font "hack 16"
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -50,10 +44,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+#bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -88,6 +82,10 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
+bindsym $mod+Left workspace prev
+bindsym $mod+Right workspace next
+bindsym $mod+q workspace back_and_forth
+
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
