@@ -63,3 +63,6 @@ time_format = "%R" # Hour:Minute Format
 style = "fg:#c5c8c6"
 format = '[ $time ]($style)'
 
+[golang]
+disabled = true
+
