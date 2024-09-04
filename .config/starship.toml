@@ -66,3 +66,6 @@ format = '[ $time ]($style)'
 [golang]
 disabled = true
 
+[nodejs]
+disabled = true
+
