@@ -28,6 +28,20 @@ function rm() {
   /bin/rm $@ -I
 }
 
+function hhm() {
+  columns='columns=name,id,ipv4,type,age,status'
+  if [ "$#" -eq 0 ]; then
+    instance=$(hcloud server list -o "$columns" -o noheader | sort | fzf --height 40%)
+  else
+    instance=$(hcloud server list -o "$columns" -o noheader | sort | fzf --height 40% -1 -q "$@")
+  fi
+  if [ "$instance" != "" ]; then
+    instance_id=$(echo $instance | awk '{print $2}')
+    echo "Connecting to $instance_id"
+    hcloud server ssh $instance_id
+  fi
+}
+
 function mem() {
   echo $(echo $(smem -t -P $1 | tail -n 1 | rev | cut -d ' ' -f 2 | rev) / 1024 | bc) MB
 }
