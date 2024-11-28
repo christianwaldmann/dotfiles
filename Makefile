@@ -5,8 +5,11 @@ SHELL := /bin/bash
 help: ## Show this help
 	@grep -E -h '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
+init: ## Run preparation scripts
+	./x/scripts/get-wallpaper.sh
+
 install: ## Install all dotfiles packages
-	stow --verbose --target=$$HOME --restow tmux wezterm starship zsh git greenclip picom i3 gtk nvim
+	stow --verbose --target=$$HOME --restow tmux wezterm starship zsh git greenclip picom i3 gtk nvim x
 
 remove: ## Remove all dotfiles packages
-	stow --verbose --target=$$HOME --delete tmux wezterm starship zsh git greenclip picom i3 gtk nvim
+	stow --verbose --target=$$HOME --delete tmux wezterm starship zsh git greenclip picom i3 gtk nvim x
