@@ -21,7 +21,7 @@ setopt inc_append_history
 setopt share_history
 
 # Shell Theme
-. ~/repos/dotfiles/base16-shell/scripts/base16-tomorrow-night.sh
+. ~/scripts/base16-tomorrow-night.sh
 
 # Custom functions
 function rm() {
