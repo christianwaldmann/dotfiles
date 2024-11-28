@@ -9,7 +9,7 @@ init: ## Run preparation scripts
 	./x/scripts/get-wallpaper.sh
 
 install: ## Install all dotfiles packages
-	stow --verbose --target=$$HOME --restow tmux wezterm starship zsh git greenclip picom i3 gtk nvim x
+	stow --verbose --target=$$HOME --restow tmux wezterm starship zsh git greenclip picom i3 gtk nvim x i3status-rs
 
 remove: ## Remove all dotfiles packages
-	stow --verbose --target=$$HOME --delete tmux wezterm starship zsh git greenclip picom i3 gtk nvim x
+	stow --verbose --target=$$HOME --delete tmux wezterm starship zsh git greenclip picom i3 gtk nvim x i3status-rs
