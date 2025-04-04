@@ -42,6 +42,111 @@ function hhm() {
   fi
 }
 
+ssm() {
+    query='Reservations[].Instances[].[Tags[?Key==`Name`]|[0].Value, InstanceId, PrivateIpAddress, InstanceType, LaunchTime, State.Name]'
+    if [ "$#" -eq 0 ]; then
+        instance=$(aws ec2 describe-instances --query "$query" --output table | sort | grep -f <(aws ssm describe-instance-information --query 'InstanceInformationList[].[InstanceId]' --output text) | fzf --height 40%)
+    else
+        instance=$(aws ec2 describe-instances --query "$query" --output table | sort | grep -f <(aws ssm describe-instance-information --query 'InstanceInformationList[].[InstanceId]' --output text) | fzf --height 40% -1 -q "$@")
+    fi
+    if [ "$instance" != "" ]; then
+        instance_id=$(echo $instance | cut -d '|' -f 3)
+        echo "Connecting to $instance"
+        aws ssm start-session --target "${instance_id// /}"
+    fi
+}
+
+select_ec2() {
+  query='Reservations[].Instances[].[Tags[?Key==`Name`]|[0].Value, InstanceId, PrivateIpAddress, InstanceType, LaunchTime, State.Name]'
+  if [ "$#" -eq 0 ]; then
+      instance=$(aws ec2 describe-instances --query "$query" --output table | sort | grep -f <(aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId]' --output text) | fzf --height 40%)
+  else
+      instance=$(aws ec2 describe-instances --query "$query" --output table | sort | grep -f <(aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId]' --output text) | fzf --height 40% -1 -q "$@")
+  fi
+  echo $instance | cut -d '|' -f 3 | xargs
+}
+
+ec2-start() {
+  instance_id=$(select_ec2 $@)
+  if [ "$instance_id" != "" ]; then
+    echo "Starting $instance_id"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws ec2 start-instances --instance-ids "$instance_id"
+  fi
+}
+
+ec2-stop() {
+  instance_id=$(select_ec2 $@)
+  if [ "$instance_id" != "" ]; then
+    echo "Stopping $instance_id"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws ec2 stop-instances --instance-ids "$instance_id"
+  fi
+}
+
+select_rds() {
+  query='DBInstances[].[DBInstanceIdentifier, Engine, DBInstanceClass, InstanceCreateTime, DBInstanceStatus]'
+  if [ "$#" -eq 0 ]; then
+    instance=$(aws rds describe-db-instances --query "$query" --output table | sort | grep -f <(aws rds describe-db-instances --query 'DBInstances[].[DBInstanceIdentifier]' --output text) | fzf --height 40%)
+  else
+    instance=$(aws rds describe-db-instances --query "$query" --output table | sort | grep -f <(aws rds describe-db-instances --query 'DBInstances[].[DBInstanceIdentifier]' --output text) | fzf --height 40% -1 -q "$@")
+  fi
+  echo $instance | cut -d '|' -f 2 | xargs
+}
+
+rds-start() {
+  instance_id=$(select_rds $@)
+  if [ "$instance_id" != "" ]; then
+    echo "Starting $instance_id"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws rds start-db-instance --db-instance-identifier "$instance_id"
+  fi
+}
+
+rds-stop() {
+  instance_id=$(select_rds $@)
+  if [ "$instance_id" != "" ]; then
+    echo "Stopping $instance_id"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws rds stop-db-instance --db-instance-identifier "$instance_id"
+  fi
+}
+
+select_asg() {
+  query='AutoScalingGroups[].[AutoScalingGroupName, Instances[0].InstanceType || `n/a`, MinSize, DesiredCapacity, MaxSize, CreatedTime]'
+  if [ "$#" -eq 0 ]; then
+      asg=$(aws autoscaling describe-auto-scaling-groups --query "$query" --output table | sort | grep -f <(aws autoscaling describe-auto-scaling-groups --query 'AutoScalingGroups[].[AutoScalingGroupName]' --output text) | fzf --height 40%)
+  else
+      asg=$(aws autoscaling describe-auto-scaling-groups --query "$query" --output table | sort | grep -f <(aws autoscaling describe-auto-scaling-groups --query 'AutoScalingGroups[].[AutoScalingGroupName]' --output text) | fzf --height 40% -1 -q "$@")
+  fi
+  echo $asg | cut -d '|' -f 2 | xargs
+}
+
+autoscaling-start() {
+  group_name=$(select_asg $@)
+  if [ "$group_name" != "" ]; then
+    echo "Starting $group_name"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws autoscaling update-auto-scaling-group --auto-scaling-group-name "$group_name" --desired-capacity 1
+  fi
+}
+
+autoscaling-stop() {
+  group_name=$(select_asg $@)
+  if [ "$group_name" != "" ]; then
+    echo "Stopping $group_name"
+    echo "Press <Ctrl>-<C> to abort or <Enter> to continue…" >&2
+    read -r
+    aws autoscaling update-auto-scaling-group --auto-scaling-group-name "$group_name" --desired-capacity 0
+  fi
+}
+
+
 function mem() {
   echo $(echo $(smem -t -P $1 | tail -n 1 | rev | cut -d ' ' -f 2 | rev) / 1024 | bc) MB
 }
