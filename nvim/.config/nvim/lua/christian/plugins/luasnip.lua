@@ -1,3 +1,4 @@
+-- make it possible to define snippets
 return {
      "L3MON4D3/LuaSnip",
      version = "v2.1.0",

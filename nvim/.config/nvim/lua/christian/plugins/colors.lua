@@ -1,3 +1,4 @@
+-- sets color scheme
 return {
     "vague2k/vague.nvim",
     lazy=false,
