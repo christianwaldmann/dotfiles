@@ -1,4 +1,6 @@
 -- syntax highlighting
+local function augroup(name) return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true }) end
+
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -6,7 +8,7 @@ return {
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
-                "vimdoc", "javascript", "typescript", "c", "lua", "java", "markdown",
+                "vimdoc", "javascript", "typescript", "c", "lua", "java", "markdown", "groovy",
                 "jsdoc", "bash", "python", "go", "terraform", "yaml", "json", "dockerfile"
             },
             sync_install = false,
@@ -33,6 +35,13 @@ return {
                     end
                 end,
             },
+        })
+        vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+            group = augroup("jenkinsfile_detect"),
+            pattern = { "Jenkinsfile", "Jenkinsfile.*" },
+            callback = function()
+                vim.cmd("set filetype=groovy")
+            end
         })
     end
 }
