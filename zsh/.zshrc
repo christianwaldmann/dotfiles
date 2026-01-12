@@ -1,6 +1,10 @@
 autoload -U promptinit; promptinit; 
-autoload -U compinit
-compinit
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
