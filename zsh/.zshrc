@@ -219,3 +219,7 @@ addToPathFront $HOME/.local/scripts
 
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
+export PATH=~/.npm-global/bin:$PATH
+
+export OPENCODE_CONFIG_DIR=~/.claude
+
