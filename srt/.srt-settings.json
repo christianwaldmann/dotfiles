@@ -11,6 +11,7 @@
       "github.com",
       "*.github.com",
       "*.githubusercontent.com",
+      "*.githubcopilot.com",
       "hashicorp.com"
     ],
     "deniedDomains": [],
@@ -31,10 +32,12 @@
       "~/.cache/opencode",
       "~/.local/state/opencode",
       "~/repos/dotfiles/opencode",
+      "~/.nvm",
       "."
     ],
     "allowWrite": [
       "~/.local/share/opencode",
+      "/tmp",
       "."
     ]
   }
