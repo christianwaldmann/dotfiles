@@ -4,6 +4,7 @@ return {
     lazy = false,
     config = function()
         require("Comment").setup()
+        vim.keymap.set({'n', 'v'}, '<C-\\>', 'gc', { remap = true, desc = 'Toggle comment' })
     end
 }
 
