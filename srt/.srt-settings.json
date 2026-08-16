@@ -10,7 +10,8 @@
       "*.crates.io",
       "github.com",
       "*.github.com",
-      "*.githubusercontent.com"
+      "*.githubusercontent.com",
+      "hashicorp.com"
     ],
     "deniedDomains": [],
     "allowAllUnixSockets": true
@@ -29,6 +30,7 @@
       "~/.local/share/opencode",
       "~/.cache/opencode",
       "~/.local/state/opencode",
+      "~/repos/dotfiles/opencode",
       "."
     ],
     "allowWrite": [
