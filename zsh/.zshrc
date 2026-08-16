@@ -188,6 +188,58 @@ function dockerssh() {
   docker exec -it $(docker container ls | tail -n +2 | fzf | awk -F '   ' '{print $1}') /bin/bash
 }
 
+code-server-ui() {
+  local folder="${1:-$PWD}"
+  local name="${${folder:A}:t}"
+  name="${name//[^a-zA-Z0-9._-]/-}"
+  local sock=/tmp/srt-cs/cs-$name.sock
+  local pfile=/tmp/srt-cs/cs-$name.port
+  local session=code-server-ui-$name
+  local port
+
+  mkdir -p /tmp/srt-cs && chmod 700 /tmp/srt-cs || return 1
+
+  local -a used
+  used=( ${(f)"$(ss -tlnH 2>/dev/null | awk '{split($4,a,":"); print a[length(a)]}')"} )
+
+  if [[ -S $sock ]] && curl -s --unix-socket "$sock" http://localhost/ -o /dev/null 2>/dev/null; then
+    port=$(<"$pfile" 2>/dev/null)
+    if [[ -z $port ]]; then
+      echo "cs: instance running but port unknown; see 'tmux attach -t $session'" >&2
+      return 0
+    fi
+    echo "cs: $folder at http://localhost:$port"
+    xdg-open "http://localhost:$port"
+    return 0
+  fi
+
+  if tmux has-session -t "$session" 2>/dev/null; then
+    tmux kill-session -t "$session"
+  fi
+  rm -f "$sock" "$pfile"
+
+  for port in {8080..9000}; do
+    (( ${used[(Ie)$port]} )) || break
+  done
+  echo "$port" > "$pfile"
+
+  tmux new-session -d -s "$session" \
+    "srt code-server --socket $sock --auth none '$folder' & until [ -S $sock ]; do sleep 0.2; done; socat TCP-LISTEN:$port,reuseaddr,fork UNIX-CONNECT:$sock"
+
+  for _ in {1..50}; do
+    [[ -S $sock ]] && break
+    sleep 0.2
+  done
+  if [[ -S $sock ]] && curl -s --unix-socket "$sock" http://localhost/ -o /dev/null 2>/dev/null; then
+    echo "code-server-ui: $folder at http://localhost:$port"
+    xdg-open "http://localhost:$port"
+  else
+    echo "code-server-ui: code-server failed to start; see 'tmux attach -t $session'" >&2
+    return 1
+  fi
+}
+
+
 # Tmux Shortcuts
 if test $TMUX; then
   bindkey '^[[1~'  beginning-of-line
