@@ -221,3 +221,9 @@ addToPathFront $HOME/.local/scripts
 # Start tmux on every new terminal
 if [ "$TMUX" = "" ]; then tmux; fi
 export PATH=~/.npm-global/bin:$PATH
+
+# Load local-specific configuration if present
+if [[ -f "$HOME/.zshrc.local" ]]; then
+    source "$HOME/.zshrc.local"
+fi
+
