@@ -13,9 +13,6 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec wezterm
 
-# start note taking program
-bindysm $mod+n exec JoplinDesktop.AppImage
-
 # start clipboard manager
 bindsym $mod+p exec rofi -modi "📋:greenclip print" -show "📋" -run-command '{cmd}' -font "hack 16"
 
