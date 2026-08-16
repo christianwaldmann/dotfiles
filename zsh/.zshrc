@@ -218,8 +218,6 @@ addToPathFront $HOME/go/bin/
 addToPathFront $HOME/.local/bin/
 addToPathFront $HOME/.local/scripts
 
-# Start tmux on every new terminal
-if [ "$TMUX" = "" ]; then tmux; fi
 export PATH=~/.npm-global/bin:$PATH
 
 # Load local-specific configuration if present
