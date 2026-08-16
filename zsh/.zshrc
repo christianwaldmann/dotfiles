@@ -182,6 +182,7 @@ alias serve="python -m http.server 8000"
 alias k="kubectl"
 alias rpi-k8s="export KUBECONFIG=~/.kube/config.rpi-k8s"
 alias vim="nvim"
+alias oc='env -i HOME="$HOME" PATH="$PATH" TERM="$TERM" USER="$USER" LANG="$LANG" srt opencode'
 
 function dockerssh() {
   docker exec -it $(docker container ls | tail -n +2 | fzf | awk -F '   ' '{print $1}') /bin/bash

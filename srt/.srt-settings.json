@@ -1,0 +1,40 @@
+{
+  "network": {
+    "allowedDomains": [
+      "opencode.ai",
+      "pypi.org",
+      "files.pythonhosted.org",
+      "npmjs.org",
+      "*.npmjs.org",
+      "crates.io",
+      "*.crates.io",
+      "github.com",
+      "*.github.com",
+      "*.githubusercontent.com"
+    ],
+    "deniedDomains": [],
+    "allowAllUnixSockets": true
+  },
+  "filesystem": {
+    "denyRead": [
+      "~",
+      "~/.ssh",
+      "~/.aws",
+      "~/.kube",
+      "**.env*"
+    ],
+    "denyWrite": [],
+    "allowRead": [
+      "~/.config/opencode",
+      "~/.local/share/opencode",
+      "~/.cache/opencode",
+      "~/.local/state/opencode",
+      "."
+    ],
+    "allowWrite": [
+      "~/.local/share/opencode",
+      "."
+    ]
+  }
+}
+
