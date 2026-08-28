@@ -14,9 +14,12 @@ focus_pane_right = "ctrl+right"
 split_vertical = "prefix+|"
 split_horizontal = "prefix+-"
 zoom = "ctrl+f"
+rename_tab = "prefix+,"
 
 [ui]
 agent_panel_sort = "spaces"
+sidebar_start_collapsed = true
+tab_bar_position = "bottom"
 
 [[keys.command]]
 key = "prefix+f"
