@@ -1,0 +1,31 @@
+onboarding = false
+
+[keys]
+prefix = "ctrl+a"
+workspace_picker = "prefix+s"
+previous_tab = "alt+left"
+next_tab = "alt+right"
+last_pane = "alt+q"
+switch_tab = "alt+1..9"
+focus_pane_left = "ctrl+left"
+focus_pane_down = "ctrl+down"
+focus_pane_up = "ctrl+up"
+focus_pane_right = "ctrl+right"
+split_vertical = "prefix+|"
+split_horizontal = "prefix+-"
+zoom = "ctrl+f"
+
+[ui]
+agent_panel_sort = "spaces"
+
+[[keys.command]]
+key = "prefix+f"
+type = "pane"
+command = "~/scripts/herdr-sessionizer.sh"
+description = "open project workspace"
+
+[[keys.command]]
+key = "prefix+up"
+type = "plugin_action"
+command = "sessionizer.worktree-open"
+description = "open worktree workspace"
