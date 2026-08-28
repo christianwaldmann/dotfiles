@@ -2,11 +2,19 @@
 
 set -euo pipefail
 
-selected=$(
-  find "$HOME/repos" -mindepth 1 -maxdepth 1 -type d ! -name '.*' | \
-    sort | \
-    fzf --prompt='Project: ' --preview='ls -la {}'
-)
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(
+    find "$HOME/repos" "$HOME" -mindepth 1 -maxdepth 1 -type d | \
+      sed "s|^$HOME/||" | \
+      fzf
+  )
+
+  if [[ -n $selected ]]; then
+    selected="$HOME/$selected"
+  fi
+fi
 
 [[ -n $selected ]] || exit 0
 
