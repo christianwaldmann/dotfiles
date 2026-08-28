@@ -20,6 +20,7 @@ rename_tab = "prefix+,"
 agent_panel_sort = "spaces"
 sidebar_start_collapsed = true
 tab_bar_position = "bottom"
+prompt_new_tab_name = false
 
 [[keys.command]]
 key = "prefix+f"
