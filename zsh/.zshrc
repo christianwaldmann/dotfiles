@@ -199,6 +199,16 @@ else
   bindkey '^[[3~'  delete-char
 fi
 
+# Nix
+if [ -d ~/.nix-profile/share/zsh-completion/completions ]; then
+    for c in ~/.nix-profile/share/zsh-completion/completions/*; do
+        . $c
+    done
+fi
+alias nix-update='nix-channel --update; NIXPKGS_ALLOW_UNFREE=1 nix-env --upgrade'
+alias nix-clean='nix-env --delete-generations old; nix-store --gc; nix-collect-garbage -d'
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi
+
 # Auto complete
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
