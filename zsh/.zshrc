@@ -215,7 +215,6 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source <(kubectl completion zsh)
 source /usr/share/fzf/key-bindings.zsh
 complete -o nospace -C /usr/bin/terraform terraform
-source /home/christian/.jfrog/jfrog_zsh_completion
 
 # Local binaries
 function addToPathFront() {
